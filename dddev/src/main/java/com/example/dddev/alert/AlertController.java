@@ -57,8 +57,25 @@ public class AlertController {
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/receive-alert")
-    public ResponseEntity<?> receiveAlert(@RequestHeader(required = false) Map<String, Object> headerMap, @RequestBody(required = false) Map<String, Object> bodyMap) {
+    @PostMapping("/receive-push-alert")
+    public ResponseEntity<?> receivePushAlert(@RequestHeader(required = false) Map<String, Object> headerMap, @RequestBody(required = false) Map<String, Object> bodyMap) {
+
+        log.info("=================header value start==============");
+        for(String key : headerMap.keySet()) {
+            Object value = headerMap.get(key);
+            log.info("key: {}, value: {}", key, value);
+        }
+        log.info("=================body value start================");
+        for(String key : bodyMap.keySet()) {
+            Object value = bodyMap.get(key);
+            log.info("key: {}, value: {}", key, value);
+        }
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/receive-pull-request-alert")
+    public ResponseEntity<?> receivePullRequestAlert(@RequestHeader(required = false) Map<String, Object> headerMap, @RequestBody(required = false) Map<String, Object> bodyMap) {
 
         log.info("=================header value start==============");
         for(String key : headerMap.keySet()) {
